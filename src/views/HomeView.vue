@@ -24,6 +24,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <pre v-if="weather.length > 0">{{ weather }}</pre>
+
+    <div v-for="item in weather" :key="item.id">
+      <div class="flex justify-between">
+        <p class="font-bold">{{ item.name }}, {{ item.sys?.country }}</p>
+        <div>X</div>
+      </div>
+    </div>
+
+
+    <pre v-if="weather.length > 0">{{ weather }}</pre>
 </template>
+
+<style scoped>
+
+</style>
 

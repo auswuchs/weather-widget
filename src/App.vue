@@ -2,7 +2,9 @@
 </script>
 
 <template>
-  <RouterView />
+  <div class="container mx-auto">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>
