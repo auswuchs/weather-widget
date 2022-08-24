@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <h1>Weather Widget</h1>
+  <RouterView />
 </template>
 
 <style scoped>
