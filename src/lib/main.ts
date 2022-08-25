@@ -23,4 +23,25 @@ export const lib = {
     }, Promise.resolve());
     return result;
   },
+
+  moveItemInArray<T>(array: T[], fromIndex: number, toIndex: number) {
+    const arr = [...array];
+    const from = fromIndex;
+    const to = toIndex;
+
+    if (from === to) {
+      return arr;
+    }
+
+    const target = arr[from];
+    const delta = to < from ? -1 : 1;
+
+    for (let i = from; i !== to; i += delta) {
+      arr[i] = arr[i + delta];
+    }
+
+    arr[to] = target;
+    return arr;
+  }
+
 }

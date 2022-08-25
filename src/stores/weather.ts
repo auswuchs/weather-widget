@@ -7,7 +7,7 @@ export const useWeatherStore = defineStore('Weather', {
   state: () => {
     return {
       weather: [] as Weather[],
-      locations: [] as Location[]
+      locations: [] as Location[],
     }
   },
   actions: {
@@ -23,6 +23,19 @@ export const useWeatherStore = defineStore('Weather', {
     removeWeather (idx: number): void  {
       this.weather.splice(idx, 1)
       this.removeLocation(idx)
+    },
+
+    resetWeather() {
+      this.weather = []
+    },
+
+    setWeather(weatherArr: Weather[]): void {
+      this.resetWeather()
+
+      weatherArr.forEach((singleWeather: Weather) => {
+        this.addWeather(singleWeather)
+      });
+
     },
 
     addLocation(singleWeather: Weather | Location): void {

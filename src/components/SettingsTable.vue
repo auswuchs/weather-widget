@@ -8,21 +8,27 @@ const props = defineProps<{
 }>() 
 
 const emit = defineEmits<{
-  (e: 'removeLocation', id: number): void
+  (e: 'removeLocation', id: number): void,
+  (e: 'onDrop', idx: object): void
 }>()
+
 
 const onRemoveLocation = (id: number) => {
   emit('removeLocation', id)
 }
 
+
 </script>
 
 <template>
-  <main class="settings-main mx-auto">
+  <main class="settings-main">
     <Settings-Weather v-for="(item, idx) in weather" :key="item.id" 
         :item="item"
         :idx="idx"
-        @removeLocation="onRemoveLocation"/>
+        :draggable="true"
+        @removeLocation="onRemoveLocation"
+        @onDrop="emit('onDrop', $event)" 
+        />
 
   </main>
 
@@ -30,6 +36,6 @@ const onRemoveLocation = (id: number) => {
 
 <style scoped>
 .settings-main {
-  @apply flex justify-center
+  @apply flex flex-col items-center justify-center mx-auto
 }
 </style>

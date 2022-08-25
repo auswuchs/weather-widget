@@ -20,8 +20,10 @@ const getAutoWeather = async () => {
   const userLocation = await api.getUserLocation()
   const { city, country } = userLocation;
   const initialWeather = await api.getWeather(city, country)
+  const secondWeather = await api.getWeather('New York', 'us')
 
   store.addWeather(initialWeather)
+  store.addWeather(secondWeather)
 }
 
 const getCachedLocations = async () => {
