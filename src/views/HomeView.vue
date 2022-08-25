@@ -1,15 +1,17 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { onMounted, computed } from 'vue'
+
 import { api } from '@/lib/api'
 import { lib } from '@/lib/main'
 
 import type { Weather, Location } from '@/lib/types'
 
-import { useRouter } from 'vue-router'
-import { onMounted, computed } from 'vue'
+import TheHeader from '@/components/TheHeader.vue'
+
 import { useWeatherStore } from '@/stores/weather'
 const store = useWeatherStore()
 const router = useRouter()
-
 
 
 const weather = computed(() => store.getWeather)
@@ -42,15 +44,7 @@ onMounted(() => {
 
 <template>
   <div class="container mx-auto">
-    <v-icon class="main-icon" 
-            name="la-cog-solid"
-            scale="2"
-            animation="spin"
-            speed="slow"
-            title="Settings"
-            :hover="true"
-            @click="router.push({ name:'settings'})"
-            ></v-icon>
+    <The-Header />
 
     <div v-for="(item, idx) in weather" :key="item.id">
       <div class="flex justify-between max-w-lg">
