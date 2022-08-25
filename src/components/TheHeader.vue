@@ -20,21 +20,22 @@ const zeleboba = () => {
     <header class="header">
       <div class="w-full"></div>      
       
-      <div class="input-group">
+      <div class="input-group" v-if="!isHomePage">
         <input class="city-input"
             type="text" 
             placeholder="Weather in your city..."
             v-model="cityName"
-            @keypress.enter.exact="zeleboba"
-            v-if="!isHomePage">
+            @keypress.enter.exact="zeleboba">
         
-        <v-icon name="bi-search"
+        <div class="search-bg">
+          <v-icon name="bi-search"
                 class="search-icon"
                 :hover="true"
                 animation="pulse"
-                scale="2.5"
+                scale="2.05"
                 @click="zeleboba"
         ></v-icon>
+        </div>
       </div>
 
       <button class="main-button">
@@ -64,8 +65,11 @@ const zeleboba = () => {
   @apply flex justify-center items-center
 }
 
+.search-bg {
+  @apply bg-slate-200
+}
 .search-icon {
-  @apply cursor-pointer px-2
+  @apply cursor-pointer px-2 
 }
 .city-input {
   @apply px-4 py-2 w-full
