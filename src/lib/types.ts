@@ -45,7 +45,12 @@ export interface Weather {
     sunset: number
   },
   timezone?: number,
-  id?: number,
-  name?: string,
+  id: number,
+  name: string,
   cod?: number
+}
+
+export interface Location {
+  id: number,
+  name: string
 }
