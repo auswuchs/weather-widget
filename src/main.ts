@@ -18,4 +18,4 @@ app.component("v-icon", OhVueIcon)
 app.use(createPinia())
 app.use(router)
 
-app.mount('#weather-widget')
+app.mount('#app')
