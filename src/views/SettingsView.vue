@@ -5,7 +5,6 @@ import type { Weather } from '@/lib/types'
 
 import { lib } from '@/lib/main'
 
-import TheHeader from '@/components/TheHeader.vue'
 import SettingsTable from '@/components/SettingsTable.vue'
 
 
@@ -28,8 +27,6 @@ const onDrop = ({ oldIdx, toIdx }: { oldIdx: number, toIdx: number }) => {
 
 <template>
   <div class="container mx-auto">
-    <The-Header />
-
     <Settings-Table :weather="weather"
                     @removeLocation="onRemoveLocation"
                     @onDrop="onDrop"/>

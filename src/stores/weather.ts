@@ -27,6 +27,7 @@ export const useWeatherStore = defineStore('Weather', {
 
     resetWeather() {
       this.weather = []
+      this.locations = []
     },
 
     setWeather(weatherArr: Weather[]): void {
@@ -40,17 +41,15 @@ export const useWeatherStore = defineStore('Weather', {
 
     addLocation(singleWeather: Weather | Location): void {
       const { id, name } = singleWeather
-      const locations = [...this.locations]
-      locations.push({ id, name })
+      this.locations.push({ id, name })
       
-      lib.setLSData('locations', locations)  
+      lib.setLSData('locations', this.locations)  
     },
     
     removeLocation(idx: number) {
-      const locations = lib.getLSData('locations') as Location[]
-      locations.splice(idx, 1)
+      this.locations.splice(idx, 1)
 
-      lib.setLSData('locations', locations)  
+      lib.setLSData('locations', this.locations)  
     },
 
   },

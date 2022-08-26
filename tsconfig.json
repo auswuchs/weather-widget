@@ -15,7 +15,8 @@
     "lib": [
       "ESNext",
       "dom"
-    ]
+    ],
+    "moduleResolution": "node"
   },
   "references": [
     {

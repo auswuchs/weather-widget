@@ -17,9 +17,12 @@ const zeleboba = () => {
 </script>
 
 <template>
+  <div class="container mx-auto">
+    
     <header class="header">
       <div class="w-full"></div>      
       
+    <Transition name="fade" mode="out-in">
       <div class="input-group" v-if="!isHomePage">
         <input class="city-input"
             type="text" 
@@ -37,6 +40,7 @@ const zeleboba = () => {
         ></v-icon>
         </div>
       </div>
+    </Transition>
 
       <button class="main-button">
         <v-icon :name="isHomePage ? 'la-cog-solid' : 'io-close'"
@@ -50,6 +54,7 @@ const zeleboba = () => {
                 ></v-icon>
       </button>
     </header>
+  </div>
 </template>
 
 <style scoped>
@@ -81,5 +86,14 @@ const zeleboba = () => {
 
 .main-icon {
   @apply block float-right
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
