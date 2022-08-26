@@ -9,7 +9,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'removeLocation', id: number): void,
-  (e: 'onDrop', idx: object): void
+    (e: 'onDrop', idx: {oldIdx: number, toIdx: number} ): void
 }>()
 
 
