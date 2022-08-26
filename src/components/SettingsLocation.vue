@@ -5,7 +5,7 @@ import { lib } from '@/lib/main'
 
 const emit = defineEmits<{
   (e: 'removeLocation', id: number): void,
-  (e: 'onDrop', idx: object): void
+  (e: 'onDrop', idx: {oldIdx: number, toIdx: number}): void
 }>()
 
 const props = defineProps<{
@@ -24,7 +24,7 @@ const onDragStart = () => {
 
 }
 const onDrop = () => {
-  emit('onDrop', { oldIdx: lib.getLSData('oldIdx'), toIdx: props.idx })
+  emit('onDrop', { oldIdx: lib.getLSData('oldIdx') as number, toIdx: props.idx })
 }
 
 

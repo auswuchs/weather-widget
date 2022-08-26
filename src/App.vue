@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { api } from '@/lib/api'
+import { lib } from '@/lib/main'
+
 import TheHeader from '@/components/TheHeader.vue'
 import VLoader from '@/components/VLoader.vue'
 import { onBeforeMount, ref, watch, computed } from 'vue'
@@ -8,8 +11,6 @@ import type { Weather, Location } from '@/lib/types'
 import { useWeatherStore } from '@/stores/weather'
 const store = useWeatherStore()
 
-import { api } from '@/lib/api'
-import { lib } from '@/lib/main'
 
 const city = ref('')
 const location = ref<Weather | null>(null)
