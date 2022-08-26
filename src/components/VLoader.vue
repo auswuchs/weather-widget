@@ -12,7 +12,7 @@
 .v-loader {
   z-index: 5000;
 
-  @apply fixed w-screen h-screen backdrop-blur-md bg-slate-900 opacity-70 left-0 top-0 hidden
+  @apply fixed w-screen h-screen backdrop-blur-md bg-slate-900 opacity-70 left-0 top-0
 }
 
 .v-spinner {

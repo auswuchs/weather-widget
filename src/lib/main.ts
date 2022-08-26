@@ -57,16 +57,4 @@ export const lib = {
     return <T>(<any>callable);
   },
 
-  showLoader() {
-    const el = document.querySelector<HTMLElement>('#vloader') 
-    if (!el) return
-    el.style.display = 'block'
-  },
-  
-  hideLoader() {
-    const el = document.querySelector<HTMLElement>('#vloader')
-    if (!el) return
-    el.style.display = 'none'
-  },
-
 }

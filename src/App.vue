@@ -15,6 +15,16 @@ const store = useWeatherStore()
 const city = ref('')
 const location = ref<Weather | null>(null)
 const canSearch = ref(true)
+const loader = ref(false)
+
+
+const showLoader = () => {
+  loader.value = true
+}
+
+const hideLoader = () => {
+  loader.value = false
+}
 
 const getUserWeather = async () => {
   try {
@@ -43,7 +53,7 @@ const getCachedLocations = async () => {
 
 const getLocation = async () => {
   if (canSearch.value && city.value) {
-    lib.showLoader()
+    showLoader()
     canSearch.value = false
 
     try {
@@ -51,7 +61,7 @@ const getLocation = async () => {
     } catch (e) {
       console.error(e)
     } finally {
-      lib.hideLoader()
+      hideLoader()
       canSearch.value = true
     }
   }
@@ -106,7 +116,7 @@ export default {
       </transition>
     </router-view>
 
-    <V-Loader />
+    <V-Loader v-if="loader" />
 </template>
 
 <style scoped>
