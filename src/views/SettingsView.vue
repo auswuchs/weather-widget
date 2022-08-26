@@ -26,10 +26,13 @@ const onDrop = ({ oldIdx, toIdx }: { oldIdx: number, toIdx: number }) => {
 
 
 <template>
-  <div class="container mx-auto">
+  <div class="container mx-auto" v-if="weather.length > 0">
     <Settings-Table :weather="weather"
                     @removeLocation="onRemoveLocation"
                     @onDrop="onDrop"/>
 
+  </div>
+  <div v-else>
+    <h2 class="text-center p-16 font-bold text-2xl">You deleted all the locations :(</h2>
   </div>
 </template>

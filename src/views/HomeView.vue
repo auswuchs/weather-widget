@@ -19,7 +19,7 @@ const weather = computed(() => store.getWeather)
       </div>
     </div>
 
-    <h2 v-else>You haven't added any locations</h2>
+    <h2 class="text-center p-16 font-bold text-2xl" v-else>There's nothing here, as well :(</h2>
   </main>
 </template>
 
