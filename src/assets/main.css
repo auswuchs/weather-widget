@@ -5,13 +5,13 @@
 
   font-weight: normal;
 
-  @apply px-2 pt-4 sm:p-8
+  @apply px-2 pt-4
 }
 
-html { margin-left: calc(100vw - 100%); }
+html {
+  padding-left: calc(100vw - 100%);
+}
 
 body {
   @apply bg-slate-100
 }
-
-
