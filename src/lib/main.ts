@@ -59,12 +59,14 @@ export const lib = {
 
   showLoader() {
     const el = document.querySelector<HTMLElement>('#vloader') 
-    if(el) el.style.display = 'block'
+    if (!el) return
+    el.style.display = 'block'
   },
   
   hideLoader() {
     const el = document.querySelector<HTMLElement>('#vloader')
-    if (el) el.style.display = 'none'
+    if (!el) return
+    el.style.display = 'none'
   },
 
 }

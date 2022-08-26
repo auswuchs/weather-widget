@@ -17,23 +17,16 @@ const location = ref<Weather | null>(null)
 const canSearch = ref(true)
 
 const getUserWeather = async () => {
-  lib.showLoader()
-
   try {
     const userLocation = await api.getUserLocation()
     const { city, country } = userLocation;
     const initialWeather = await api.getWeather(city, country)
-    const secondWeather = await api.getWeather('New York', 'us')
 
     store.addWeather(initialWeather)
-    store.addWeather(secondWeather)
-    
   } catch (e) {
     console.error(e)
     
-  } finally {
-    lib.hideLoader()
-  }
+  } 
 }
 
 const getCachedLocations = async () => {
