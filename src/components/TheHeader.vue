@@ -45,7 +45,7 @@ const zeleboba = () => {
       <button class="main-button">
         <v-icon :name="isHomePage ? 'la-cog-solid' : 'io-close'"
                 class="main-icon"
-                scale="2"
+                scale="2.1"
                 animation="spin"
                 speed="slow"
                 :title="isHomePage ? 'Settings' : 'Close'"
@@ -77,7 +77,8 @@ const zeleboba = () => {
   @apply cursor-pointer px-2 
 }
 .city-input {
-  @apply px-4 py-2 w-full
+  min-width: 100%;
+  @apply px-4 py-2 max-w-full
 }
 
 .main-button {

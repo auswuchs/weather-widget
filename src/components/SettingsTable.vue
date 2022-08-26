@@ -1,6 +1,6 @@
 <script lang="ts" setup >
 import type { Weather } from '@/lib/types'
-import SettingsWeather from '@/components/SettingsWeather.vue'
+import SettingsLocation from '@/components/SettingsLocation.vue'
 
 
 const props = defineProps<{
@@ -22,7 +22,7 @@ const onRemoveLocation = (id: number) => {
 
 <template>
   <main class="settings-main">
-    <Settings-Weather v-for="(item, idx) in weather" :key="item.id" 
+    <Settings-Location v-for="(item, idx) in weather" :key="item.id" 
         :item="item"
         :idx="idx"
         :draggable="true"

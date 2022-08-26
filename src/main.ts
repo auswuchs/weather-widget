@@ -5,9 +5,9 @@ import App from './App.vue'
 import router from './router'
 
 import { OhVueIcon, addIcons } from "oh-vue-icons";
-import { LaCogSolid, IoClose, BiSearch, MdDraghandle, BiTrash } from 'oh-vue-icons/icons'
+import { LaCogSolid, IoClose, BiSearch, MdDraghandle, BiTrash, FaWind, WiBarometer } from 'oh-vue-icons/icons'
 
-addIcons(LaCogSolid, IoClose, BiSearch, MdDraghandle, BiTrash);
+addIcons(LaCogSolid, IoClose, BiSearch, MdDraghandle, BiTrash, FaWind, WiBarometer);
 
 import '@/index.css'
 import './assets/main.css'

@@ -42,6 +42,8 @@ export const lib = {
 
     arr[to] = target;
     return arr;
-  }
+  },
+
+  capitalizeFirstLetter (str: string) { return str.charAt(0).toUpperCase() + str.slice(1) },
 
 }

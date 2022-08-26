@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TheHeader from '@/components/TheHeader.vue'
-import { onMounted } from 'vue'
+import { onBeforeMount } from 'vue'
 
 import type { Weather, Location } from '@/lib/types'
 
@@ -33,7 +33,7 @@ const getCachedLocations = async () => {
   }
 }
 
-onMounted(() => {
+onBeforeMount(() => {
   getCachedLocations()
 })
 
