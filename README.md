@@ -2,6 +2,19 @@
 
 This template should help get you started developing with Vue 3 in Vite.
 
+## Setup
+
+Add the following line to the end of the script tag
+```html
+<script type="text/javascript" src="https://auswuchs.github.io/weather-widget/weather-widget.js"></script>
+```
+
+Then create a `div` with `id="weather-widget"` in the right place
+```html
+<div id="weather-widget"></div>
+```
+And you're awesome!
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
