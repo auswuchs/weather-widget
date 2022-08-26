@@ -4,16 +4,15 @@ This template should help get you started developing with Vue 3 in Vite.
 
 ## Setup
 
-Add the following line to the end of the script tag
+Add the following code to the any place you want. 
 ```html
-<script type="text/javascript" src="https://auswuchs.github.io/weather-widget/weather-widget.js"></script>
+<iframe
+	width="1280px"
+	height="720px"
+	src="https://auswuchs.github.io/weather-widget/"
+></iframe>
 ```
-
-Then create a `div` with `id="weather-widget"` in the right place
-```html
-<div id="weather-widget"></div>
-```
-And you're awesome!
+Specify the `width` and the `height` if needed. Set `width="100%" height="100%"` and limit the size of the iframe with the only parent block.
 
 ## Recommended IDE Setup
 
