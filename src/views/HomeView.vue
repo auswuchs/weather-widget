@@ -1,29 +1,33 @@
 <script setup lang="ts">
-import { api } from '@/lib/api'
-import { onMounted, computed } from 'vue'
+import { computed } from 'vue'
+
+import WeatherLocation from '@/components/WeatherLocation.vue'
 
 import { useWeatherStore } from '@/stores/weather'
 const store = useWeatherStore()
 
-const getInitialWeather = async () => {
-  const userLocation = await api.getUserLocation()
-  const { city, country } = userLocation;
-  const initialWeather = await api.getWeather(city, country)
 
-  store.addWeather(initialWeather)
-}
-
-const weather = computed(() =>  store.getWeather)
-
-onMounted(() => {
-  getInitialWeather()
-})
-
-
+const weather = computed(() => store.getWeather)
 
 </script>
 
 <template>
-  <pre v-if="weather.length > 0">{{ weather }}</pre>
+  <main class="container mx-auto min-h-screen">
+    <div v-if="weather.length > 0" class="main-grid">
+      <div v-for="(item) in weather" :key="item.id" class="bg-slate-200">
+        <Weather-Location :weather="item" />
+      </div>
+    </div>
+
+    <h2 class="text-center p-16 font-bold text-2xl" v-else>There's nothing here, as well :(</h2>
+  </main>
 </template>
+
+<style scoped>
+.main-grid {
+
+  @apply sm:grid-cols-3 grid-cols-1 grid w-full gap-4 pt-2
+}
+
+</style>
 

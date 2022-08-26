@@ -6,7 +6,7 @@ import type { UserLocation, Weather } from "./types"
 
 export const api = {
 
-  getWeather: (city: string, country: string) => {
+  getWeather: (city: string, country: string | null = null) => {
     return new Promise<Weather>((resolve, reject) => {
       const URLQuery = country ? `${city},${country}` : `${city}`;
 

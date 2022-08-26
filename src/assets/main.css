@@ -2,7 +2,16 @@
 
 #app {
   margin: 0 auto;
-  padding: 2rem;
 
   font-weight: normal;
+
+  @apply px-2 pt-4 sm:p-8
 }
+
+html { margin-left: calc(100vw - 100%); }
+
+body {
+  @apply bg-slate-100
+}
+
+

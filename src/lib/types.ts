@@ -8,7 +8,7 @@ export interface Weather {
     lon: number,
     lat: number
   },
-  weather?: [
+  weather: [
     {
       id: number,
       main: string,
@@ -17,7 +17,7 @@ export interface Weather {
     }
   ],
   base?: string,
-  main?: {
+  main: {
     temp: number,
     feels_like: number,
     temp_min: number,
@@ -27,8 +27,8 @@ export interface Weather {
     sea_level: number,
     grnd_level: number
   },
-  visibility?: number,
-  wind?: {
+  visibility: number,
+  wind: {
     speed: number,
     deg: number,
     gust: number
@@ -37,7 +37,7 @@ export interface Weather {
     all: number
   },
   dt?: number,
-  sys?: {
+  sys: {
     type: number,
     id: number,
     country: string,
@@ -45,7 +45,12 @@ export interface Weather {
     sunset: number
   },
   timezone?: number,
-  id?: number,
-  name?: string,
+  id: number,
+  name: string,
   cod?: number
+}
+
+export interface Location {
+  id: number,
+  name: string
 }
