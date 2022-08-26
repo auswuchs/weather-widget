@@ -21,7 +21,11 @@ const degToDirection = (degree: number) => {
 }
 
 const timeToDate = (time: number) => {
-  return `${new Date(time).getUTCHours()}:${new Date(time).getUTCMinutes()}`
+  time = time * 1000
+  const timeStr = `${new Date(time).toLocaleTimeString()}` 
+  const str = timeStr.split(':')
+  
+  return `${str[0]}:${str[1]}`
 }
 </script>
 
@@ -50,7 +54,7 @@ const timeToDate = (time: number) => {
 
           <p class="font-medium">Humidity: {{ weather.main.humidity }}%</p>
 
-          <p class="font-medium">Visibility: {{ weather.visibility/1000 }}.0 km</p>
+          <p class="font-medium">Visibility: {{ (weather.visibility/1000).toFixed(1) }} km</p>
         </div>
 
         <div class="right">

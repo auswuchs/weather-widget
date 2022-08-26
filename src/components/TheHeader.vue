@@ -1,19 +1,26 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+
 
 const router = useRouter()
 const route = useRoute()
+
+const props = defineProps<{
+  city: string,
+  isAddAllowed: boolean,
+}>() 
+
+const emit = defineEmits<{
+  (e: 'update:city', text: string): void,
+  (e: 'addLocation'): void,
+}>()
 
 const isHomePage = computed(() => {
   return route.fullPath === '/'
 })
 
 
-const cityName = ref('')
-const zeleboba = () => {
-  console.warn('aboba')
-}
 </script>
 
 <template>
@@ -27,32 +34,36 @@ const zeleboba = () => {
         <input class="city-input"
             type="text" 
             placeholder="Weather in your city..."
-            v-model="cityName"
-            @keypress.enter.exact="zeleboba">
+            :value="city"
+            @input="emit('update:city', ($event.target as HTMLInputElement).value)">
         
-        <div class="search-bg">
-          <v-icon name="bi-search"
-                class="search-icon"
-                :hover="true"
-                animation="pulse"
-                scale="2.05"
-                @click="zeleboba"
-        ></v-icon>
-        </div>
+        <button class="absolute right-0 cursor-pointer" 
+                :class="{ 'bg-red-200': !isAddAllowed, 'bg-green-300': isAddAllowed}"
+                :disabled="!isAddAllowed">
+          <v-icon name="md-addchart-sharp"
+                  :animation="isAddAllowed ? 'pulse' : null"
+                  class="add-icon"
+                  :class="{'cursor-pointer': isAddAllowed}"
+                  title="Add location"
+                  scale="2.05"
+                  @click="emit('addLocation')" />
+        </button>
       </div>
     </Transition>
 
-      <button class="main-button">
-        <v-icon :name="isHomePage ? 'la-cog-solid' : 'io-close'"
-                class="main-icon"
-                scale="2.1"
-                animation="spin"
-                speed="slow"
-                :title="isHomePage ? 'Settings' : 'Close'"
-                :hover="true"
-                @click="router.push({ name: isHomePage ? 'settings' : 'home' })"
-                ></v-icon>
-      </button>
+      <div class="main-button">
+        <button>
+          <v-icon :name="isHomePage ? 'la-cog-solid' : 'io-close'"
+                  class="main-icon"
+                  scale="2.1"
+                  animation="spin"
+                  speed="slow"
+                  :title="isHomePage ? 'Settings' : 'Close'"
+                  :hover="true"
+                  @click="router.push({ name: isHomePage ? 'settings' : 'home' })"
+                  ></v-icon>
+        </button>
+      </div>
     </header>
   </div>
 </template>
@@ -67,22 +78,19 @@ const zeleboba = () => {
 }
 
 .input-group {
-  @apply flex justify-center items-center
+  @apply flex justify-center items-center relative
 }
 
-.search-bg {
-  @apply bg-slate-200
-}
-.search-icon {
-  @apply cursor-pointer px-2 
+.add-icon {
+  @apply px-2 
 }
 .city-input {
   min-width: 100%;
-  @apply px-4 py-2 max-w-full
+  @apply px-4 py-2 max-w-full  outline-0
 }
 
 .main-button {
-  @apply font-bold cursor-pointer z-50 transition-transform
+  @apply font-bold z-50 transition-transform  flex justify-end
 }
 
 .main-icon {

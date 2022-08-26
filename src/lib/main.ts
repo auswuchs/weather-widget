@@ -44,6 +44,25 @@ export const lib = {
     return arr;
   },
 
-  capitalizeFirstLetter (str: string) { return str.charAt(0).toUpperCase() + str.slice(1) },
+  capitalizeFirstLetter(str: string) {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  },
+  
+  debounce<T extends () => void>(cb: T, wait = 300) {
+    let h = 0;
+    const callable = () => {
+      clearTimeout(h);
+      h = setTimeout(() => cb(), wait);
+    };
+    return <T>(<any>callable);
+  },
+
+  showLoader() {
+    document.querySelector<HTMLElement>('#vloader')!.style.display = 'block'
+  },
+  
+  hideLoader() {
+    document.querySelector<HTMLElement>('#vloader')!.style.display = 'none'
+  },
 
 }
