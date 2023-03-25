@@ -2,8 +2,8 @@
 import { api } from '@/lib/api'
 import { lib } from '@/lib/main'
 
-import TheHeader from '@/components/TheHeader.vue'
-import VLoader from '@/components/VLoader.vue'
+import VueHeader from '@/components/VueHeader.vue'
+import VueLoader from '@/components/VueLoader.vue'
 import { onBeforeMount, ref, watch, computed } from 'vue'
 
 import type { Weather, Location } from '@/lib/types'
@@ -15,15 +15,15 @@ const store = useWeatherStore()
 const city = ref('')
 const location = ref<Weather | null>(null)
 const canSearch = ref(true)
-const loader = ref(false)
+const loading = ref(false)
 
 
 const showLoader = () => {
-  loader.value = true
+  loading.value = true
 }
 
 const hideLoader = () => {
-  loader.value = false
+  loading.value = false
 }
 
 const getUserWeather = async () => {
@@ -97,15 +97,11 @@ onBeforeMount(() => {
 <script lang="ts">
 export default {
   name: 'WeatherWidget',
-  data() {
-    return {
-    }
-  }
 }
 </script>
 
 <template>
-    <The-Header 
+    <VueHeader 
         v-model:city="city" 
         :isAddAllowed="isAddAllowed" 
         @addLocation="addLocation"/>
@@ -116,7 +112,7 @@ export default {
       </transition>
     </router-view>
 
-    <V-Loader v-if="loader" />
+    <VueLoader v-if="loading" />
 </template>
 
 <style scoped>

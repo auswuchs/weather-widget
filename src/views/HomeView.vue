@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import WeatherLocation from '@/components/WeatherLocation.vue'
+import WeatherLocation from '@/components/Main/WeatherLocation.vue'
 
 import { useWeatherStore } from '@/stores/weather'
 const store = useWeatherStore()

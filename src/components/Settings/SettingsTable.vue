@@ -1,6 +1,6 @@
 <script lang="ts" setup >
 import type { Weather } from '@/lib/types'
-import SettingsLocation from '@/components/SettingsLocation.vue'
+import SettingsLocation from '@/components/Settings/SettingsLocation.vue'
 
 
 const props = defineProps<{

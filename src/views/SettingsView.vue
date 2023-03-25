@@ -5,7 +5,7 @@ import type { Weather } from '@/lib/types'
 
 import { lib } from '@/lib/main'
 
-import SettingsTable from '@/components/SettingsTable.vue'
+import SettingsTable from '@/components/Settings/SettingsTable.vue'
 
 
 const store = useWeatherStore()
