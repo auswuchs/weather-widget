@@ -1,4 +1,6 @@
-# weather-widget
+# Weather Widget
+
+Demo [here](https://auswuchs.github.io/weather-widget/)
 
 This template should help get you started developing with Vue 3 in Vite.
 
