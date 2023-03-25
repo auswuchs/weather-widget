@@ -8,6 +8,7 @@ export const useWeatherStore = defineStore('Weather', {
     return {
       weather: [] as Weather[],
       locations: [] as Location[],
+      dragIdx: undefined as number | undefined,
     }
   },
   actions: {

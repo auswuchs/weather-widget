@@ -8,46 +8,56 @@ import VueHeader from '@/components/VueHeader.vue'
 import VueLoader from '@/components/VueLoader.vue'
 import { onBeforeMount, ref, watch, computed, defineAsyncComponent, shallowRef, type Component } from 'vue'
 
-
 import { useWeatherStore } from '@/stores/weather'
-
 const store = useWeatherStore()
 
+type Page = 'Home' | 'Settings'
 
-const city = ref('')
 const location = ref<Weather | null>(null)
 const canSearch = ref(true)
 const loading = ref(false)
-
-type Page = 'Home' | 'Settings'
 const page = ref<Page>('Home')
 const component = shallowRef<Component>()
+const city = ref('')
+
+const showLoader = () => {
+  loading.value = true
+  canSearch.value = false
+}
+
+const hideLoader = () => {
+  loading.value = false
+  canSearch.value = true
+}
 
 watch(page, async () => {
   component.value = await defineAsyncComponent(() => import(`./views/${page.value}View.vue`))
 }, { immediate: true })
 
+const getLocation = async () => {
+  if (!canSearch.value || !city.value) return
 
-const showLoader = () => {
-  loading.value = true
-}
+  showLoader()
 
-const hideLoader = () => {
-  loading.value = false
-}
-
-const getUserWeather = async () => {
   try {
-    const userLocation = await api.getUserLocation()
-    const { city, country } = userLocation;
-    const initialWeather = await api.getWeather(city, country)
-
-    store.addWeather(initialWeather)
+    location.value = await api.getWeather(city.value)
   } catch (e) {
     console.error(e)
-    
-  } 
+  } finally {
+    hideLoader()
+  }
 }
+
+const debouncedSearch = lib.debounce(getLocation, 500)
+
+watch(city, () => {
+  debouncedSearch()
+})
+
+
+onBeforeMount(() => {
+  getCachedLocations();
+})
 
 const getCachedLocations = async () => {
   const locations = lib.getLSData<Location[]>('locations') || []
@@ -60,21 +70,16 @@ const getCachedLocations = async () => {
   }
 }
 
+const getUserWeather = async () => {
+  try {
+    const userLocation = await api.getUserLocation()
+    const { city, country } = userLocation;
+    const initialWeather = await api.getWeather(city, country)
 
-const getLocation = async () => {
-  if (canSearch.value && city.value) {
-    showLoader()
-    canSearch.value = false
-
-    try {
-      location.value = await api.getWeather(city.value)
-    } catch (e) {
-      console.error(e)
-    } finally {
-      hideLoader()
-      canSearch.value = true
-    }
-  }
+    store.addWeather(initialWeather)
+  } catch (e) {
+    console.error(e)
+  } 
 }
 
 const addLocation = () => {
@@ -85,21 +90,10 @@ const addLocation = () => {
   location.value = null
 }
 
-watch(city, () => {
-  debouncedSearch()
-})
-
-const debouncedSearch = lib.debounce(getLocation, 500)
-
 const isAddAllowed = computed(() => {
   return !!city.value
     && location.value?.cod === 200
     && !store.getWeather.some(el => el.id === location.value?.id) 
-})
-
-
-onBeforeMount(() => {
-  getCachedLocations();
 })
 
 </script>

@@ -34,21 +34,26 @@ const timeToDate = (time: number) => {
     <div class="top-part">
       <h4 class="font-bold text-lg">{{ weather.name }}, {{ weather.sys?.country }}</h4>
       <div class="img">
-        <img :src="`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`" :alt="`${weather.weather[0].description} icon`">
-        <span class="font-bold text-5xl">{{ rnd(weather.main?.temp) }}&deg;C</span>
+        <img 
+            :src="`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`" 
+            :alt="`${weather.weather[0].description} icon`"
+        >
+        <span class="font-bold text-5xl">
+          {{ rnd(weather.main?.temp) }}&deg;C
+        </span>
       </div>
     </div>
 
     <div class="bottom-part">
-      <p class="text-lg  pb-4">Feels like {{ rnd(weather.main.feels_like) }}&deg;C.
+      <p class="text-lg  pb-4">
+        Feels like {{ rnd(weather.main.feels_like) }}&deg;C.
        {{ lib.capitalizeFirstLetter(weather.weather[0].description) }}. 
       </p>
 
       <div class="flex gap-8">
         <div class="left">
           <div class="icon-line">
-            <v-icon name="fa-wind"
-              scale="1.1"/>
+            <v-icon  name="fa-wind" scale="1.1" />
             <p class="font-medium">{{ weather.wind?.speed }}m/s {{ degToDirection(weather.wind?.deg) }}</p>
           </div>
 

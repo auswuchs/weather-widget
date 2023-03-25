@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Weather } from '@/lib/types'
+import { useWeatherStore } from '@/stores/weather'
 
-import { lib } from '@/lib/main'
-
+const store = useWeatherStore()
 const emit = defineEmits<{
   (e: 'removeLocation', id: number): void,
   (e: 'onDrop', idx: {oldIdx: number, toIdx: number}): void
@@ -13,34 +13,28 @@ const props = defineProps<{
   idx: number
 }>() 
 
-// не работает из-за какого-то бага vue
-// const oldIdx = ref<number | null>(null)
-
-
 const onDragStart = () => {
-  // oldIdx.value = props.idx
-  // костыль из-за бага выше
-  lib.setLSData('oldIdx', props.idx)
-
+  store.dragIdx = props.idx
 }
 const onDrop = () => {
-  emit('onDrop', { oldIdx: lib.getLSData('oldIdx') as number, toIdx: props.idx })
+  emit('onDrop', { oldIdx: store.dragIdx as number, toIdx: props.idx })
+  store.dragIdx = undefined
 }
-
 
 </script>
 
 <template>
   <div class="weather-line"               
-        :draggable="true" 
-        @drop="onDrop" 
-        @dragover.prevent
-        @dragstart="onDragStart">
+       :draggable="true" 
+       @drop="onDrop" 
+       @dragover.prevent
+       @dragstart="onDragStart">
+
     <div class="weather-group">
       <button class="drag-button">
         <v-icon name="md-draghandle"
-                scale="2"
-                ></v-icon>
+                scale="2">
+        </v-icon>
       </button>
 
       <p class="weather-name">{{ item.name }}, {{ item.sys!.country }}</p>
@@ -49,8 +43,8 @@ const onDrop = () => {
       <button class="remove-button"
               @click="emit('removeLocation', props.idx)">
         <v-icon name="bi-trash"
-                scale="1.5"
-                ></v-icon>
+                scale="1.5">
+        </v-icon>
       </button>
   </div>
 </template>

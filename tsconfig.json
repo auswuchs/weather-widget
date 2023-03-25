@@ -15,7 +15,7 @@
       ]
     },
     "lib": [
-      "ESNext",
+      "esnext",
       "dom"
     ],
     "moduleResolution": "node"
