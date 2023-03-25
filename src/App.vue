@@ -1,14 +1,16 @@
 <script setup lang="ts">
+import type { Weather, Location } from '@/lib/types'
+
 import { api } from '@/lib/api'
 import { lib } from '@/lib/main'
 
 import VueHeader from '@/components/VueHeader.vue'
 import VueLoader from '@/components/VueLoader.vue'
-import { onBeforeMount, ref, watch, computed } from 'vue'
+import { onBeforeMount, ref, watch, computed, defineAsyncComponent, shallowRef, type Component } from 'vue'
 
-import type { Weather, Location } from '@/lib/types'
 
 import { useWeatherStore } from '@/stores/weather'
+
 const store = useWeatherStore()
 
 
@@ -16,6 +18,14 @@ const city = ref('')
 const location = ref<Weather | null>(null)
 const canSearch = ref(true)
 const loading = ref(false)
+
+type Page = 'Home' | 'Settings'
+const page = ref<Page>('Home')
+const component = shallowRef<Component>()
+
+watch(page, async () => {
+  component.value = await defineAsyncComponent(() => import(`./views/${page.value}View.vue`))
+}, { immediate: true })
 
 
 const showLoader = () => {
@@ -79,7 +89,7 @@ watch(city, () => {
   debouncedSearch()
 })
 
-const debouncedSearch =  lib.debounce(getLocation, 500)
+const debouncedSearch = lib.debounce(getLocation, 500)
 
 const isAddAllowed = computed(() => {
   return !!city.value
@@ -102,15 +112,15 @@ export default {
 
 <template>
     <VueHeader 
+        :page="page"
+        :isAddAllowed="isAddAllowed"
         v-model:city="city" 
-        :isAddAllowed="isAddAllowed" 
+        @setPage="page = $event"
         @addLocation="addLocation"/>
 
-    <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <component :is="Component" />
-      </transition>
-    </router-view>
+    <transition name="fade" mode="out-in">
+      <component :is="component" />
+    </transition>
 
     <VueLoader v-if="loading" />
 </template>
